@@ -3,16 +3,25 @@ import { NextResponse } from 'next/server'
 import { writeFile } from 'fs/promises';
 import BlogModel from '@/lib/models/blogModel';
 
+const fs = require('fs');
+
 const LoadDB = async () => {
     await connectedDB();
 }
-
 LoadDB();
 
 // API endpoint to get All
 export async function GET(request) {
 
-    return NextResponse.json({ message: 'Blog API working' });
+    const blogId = request.nextUrl.searchParams.get('id');
+    if (blogId) {
+        const blog = await BlogModel.findById(blogId);
+        return NextResponse.json({ blog });
+    }else{
+        const blogs = await BlogModel.find({});
+        return NextResponse.json({ blogs });
+    }
+    
 }
 
 // api endpoint for upload blog
@@ -40,4 +49,14 @@ export async function POST(request){
 
     return NextResponse.json({success:true,message:'Blog Added'});
     
+}
+
+export async function DELETE(request) {
+    const id = await request.nextUrl.searchParams.get('id');
+    const blog = await BlogModel.findById(id);
+    fs.unlink(`./public/${blog.image}`, (err) => {
+        if (err) console.log(err);
+    });
+    await BlogModel.findByIdAndDelete(id);
+    return NextResponse.json({success:true,message:'Blog Deleted'});
 }
