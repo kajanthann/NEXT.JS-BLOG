@@ -65,19 +65,9 @@ const Page = ({ params }) => {
             height={720}
           />
         )}
-
-        <h2 className="my-8 text-2xl">Introduction:</h2>
         <p className="mt-10 max-w-[740px] text-xs sm:text-base">{blog.description}</p>
 
-        <h3 className="my-5 text-[12px] font-semibold">Step 1: Self-reflection and Goal</h3>
-        <p className="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-
-        <h3 className="my-5 text-[12px] font-semibold">Step 2: Planning</h3>
-        <p className="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-
-        <h3 className="my-5 text-[12px] font-semibold">Conclusion:</h3>
-        <p className="my-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
-
+        
         <div>
           <p className="text-black font-semibold my-4">Share this article on social media</p>
           <div className="flex space-x-2">
